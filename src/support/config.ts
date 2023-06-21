@@ -14,7 +14,28 @@ export const env = z
   .object({
     PEOPLEDATALABS_KEY: z.string({
       required_error: `Must set a valid "PEOPLEDATALABS_KEY" value in local ".env" file.`
-    })
+    }),
+    LOG_LEVEL: z
+      .enum([`trace`, `debug`, `info`, `warn`, `error`, `fatal`])
+      .optional()
+      .transform((level) => {
+        switch (level) {
+          case "trace":
+            return 0
+          case "debug":
+            return 1
+          case "info":
+            return 2
+          case "warn":
+            return 3
+          case "error":
+            return 4
+          case "fatal":
+            return 5
+          default:
+            return 2
+        }
+      })
   })
   .parse(process.env)
 
