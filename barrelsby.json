@@ -1,0 +1,13 @@
+{
+  "noHeader": true,
+  "directory": "./src",
+  "delete": true,
+  "location": "all",
+  "name": "index",
+  "structure": "flat",
+  "verbose": true,
+  "noSemicolon": true,
+  "singleQuotes": false,
+  "include": ["\\.ts$"],
+  "exclude": ["\\.js$", "\\index.ts$", "\\.test.ts$", "\\.spec.ts$", "\\.d\\.ts$"]
+}
