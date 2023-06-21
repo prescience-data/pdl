@@ -18,25 +18,25 @@
     "index:lint": "eslint src/**/index.ts --fix"
   },
   "dependencies": {
+    "@nodesuite/case": "^0.3.32",
     "arg": "^5.0.2",
-    "inquirer": "^9.2.7",
     "dotenv": "^16.3.1",
+    "inquirer": "^9.2.7",
     "peopledatalabs": "^5.0.5",
     "tslib": "^2.5.3",
-    "@nodesuite/case": "^0.3.32",
     "tslog": "^4.8.2",
     "zod": "^3.21.4"
   },
   "devDependencies": {
     "@nodesuite/eslint-config": "^0.3.32",
     "@rushstack/eslint-config": "^3.3.2",
+    "@types/inquirer": "^9.0.3",
     "@types/node": "^18.16.18",
     "@typescript-eslint/parser": "^5.60.0",
     "barrelsby": "^2.8.0",
     "eslint": "8.36.0",
     "npm-check-updates": "^16.10.12",
     "npm-run-all": "^4.1.5",
-    "@types/inquirer": "^9.0.3",
     "prettier": "^2.8.8",
     "sort-package-json": "^2.4.1",
     "tsx": "^3.12.7",
