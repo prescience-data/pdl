@@ -94,36 +94,49 @@ export class Cli {
   async #queryPerson(): Promise<void> {
     const query = new PersonQuery()
 
-    const usernames = args(["--github", "--linkedin", "--facebook"])
+    const input = args(["--email", "--github", "--linkedin", "--facebook"])
 
-    const hasUsernames = !!(
-      usernames.github ||
-      usernames.linkedin ||
-      usernames.facebook
+    const hasInput: boolean = !!(
+      input.email ||
+      input.github ||
+      input.linkedin ||
+      input.facebook
     )
 
     // If no usernames provided in cli arguments, prompt user for input.
-    if (!hasUsernames) {
+    if (!hasInput) {
       const answers = await this.#prompt({
         network: {
-          message: `Select social network:`,
+          message: `Select social network (optional):`,
           type: `list`,
-          choices: ["github", "linkedin", "facebook"]
+          choices: ["none", "github", "linkedin", "facebook"]
         },
         username: {
           message: `Enter username to query:`,
-          type: `input`
+          type: `input`,
+          when: (answers) => answers.network !== "none"
+        },
+        email: {
+          message: `Enter email to query (optional):`,
+          type: `input`,
+          default: input.email,
+          askAnswered: false
         }
       })
 
       if (isSocialNetwork(answers.network)) {
-        usernames[answers.network] = answers.username
+        input[answers.network] = answers.username
+      }
+
+      if (answers.email) {
+        input.email = answers.email
       }
     }
 
-    query.addUsername(`github`, usernames.github)
-    query.addUsername(`linkedin`, usernames.linkedin)
-    query.addUsername(`facebook`, usernames.facebook)
+    query.addUsername(`github`, input.github)
+    query.addUsername(`linkedin`, input.linkedin)
+    query.addUsername(`facebook`, input.facebook)
+    query.addEmail(input.email)
 
     const responses: PersonResponse[] = await query.execute()
 
